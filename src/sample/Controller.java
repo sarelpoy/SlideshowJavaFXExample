@@ -1,10 +1,14 @@
 package sample;
 
 
+import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 public class Controller {
 
@@ -30,5 +34,21 @@ public class Controller {
                 }
             }
         });
+        //use for auto replace
+        PauseTransition wait = new PauseTransition(Duration.seconds(3));
+        wait.setOnFinished((e) -> {
+            counter++;
+            if(counter%3==0){
+                image.setImage(image1);
+            }else  if(counter%3==1){
+                image.setImage(image2);
+            }else  if(counter%3==2){
+                image.setImage(image3);
+            }
+            wait.playFromStart();
+        });
+        wait.play();
+
+
     }
 }
